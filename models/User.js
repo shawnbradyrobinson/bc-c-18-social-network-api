@@ -6,42 +6,20 @@
 
 const {Schema, Types, model} = require('mongoose');
 
-
-
-const thoughtSchema = new Schema({
-    content: {type: String},
-    reaction: {type: String},
-});
+// const thoughtSchema = require('./Thought');
 
 const userSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId, 
-        default: () => new mongoose.Types.ObjectId(),
+        default: () => new Types.ObjectId(),
     },
     name: {type: String, required: true},
-    thoughts: [thoughtSchema],
+    thoughts: [],
     lastAccessed: {type: Date, default: Date.now},
 });
 
 const User = model('User', userSchema); 
 
-const thoughtData = [
-{
-    content: "Frank Ocean Frank Ocean Frank Ocean Frank Ocean Frank Ocean Frank Ocean Frank Ocean Frank Ocean",
-    reaction: "Liked"
-},
-{
-    content: "Kendrick Lamar Kendrick LamarKendrick LamarKendrick LamarKendrick LamarKendrick Lamar"
-},
-{
-    content: "Hippo Campus Hippo Campus Hippo Campus Hippo Campus Hippo Campus Hippo Campus Hippo Campus"
-},
-{
-    content: "Jazz JazzJazzJazzJazzJazzJazzJazzJazzJazzJazzJazz",
-    reaction: "disliked",
-},
-]
 
-User.create({name: "Shawn", thoughts: thoughtData}).then(data => console.log(data)).catch(err => console.error(err));
 
 module.exports = User; 
