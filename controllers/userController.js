@@ -28,7 +28,7 @@ module.exports = {
         try {
             const user = await User.findOne({userId: req.params.userId}).select('-__v');
 
-            if (!student) {
+            if (!user) {
                 return res.status(404).json({message: 'No user with that ID'})
             }
 
